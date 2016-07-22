@@ -55,11 +55,11 @@ export function resolvePluginBatch(pluginNames, resolveDir, cwd) {
 
 export function applyPluginBatch(plugins, curStageName, ctx, pluginArgs, _exit = noop) {
 	var result;
-
 	ctx.plugins = plugins;
-
+	reduceAsync(plugins, pluginArgs, iter, exit);
+	
 	function iter(memo, plugin, next) {
-		if (!plugin.hasOwnProperty(curStageName))
+		if (!plugin[curStageName])
 			return next(null, memo);
 
 		ctx.query = plugin.query;
@@ -87,8 +87,6 @@ export function applyPluginBatch(plugins, curStageName, ctx, pluginArgs, _exit =
 			_exit(err, result);
 	}
 
-	reduceAsync(plugins, pluginArgs, iter, exit);
-
-	return ret;
+	return result;
 }
 
