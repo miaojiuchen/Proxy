@@ -1,5 +1,3 @@
-import createServer from './index';
+import server from './index';
 
-createServer({
-	plugins: ['test']
-});
+server({ plugins: ['test'] });

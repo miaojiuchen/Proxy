@@ -7,10 +7,8 @@ function tryResolve(name, dir) {
 			baseDir: dir
 		});
 	} catch (e) {} // eslint-disable-line no-empty
-
 	return result;
 }
-
 
 export default function(pluginName, resolveDir) {
 	if (!Array.isArray(resolveDir)) {
